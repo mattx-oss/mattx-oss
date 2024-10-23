@@ -1,0 +1,109 @@
+Proceso GestionInventario
+    Definir MAX_PRODUCTOS Como Entero;
+    MAX_PRODUCTOS <- 100;
+	Definir encontrado Como logico;
+    Definir nombre Como Caracter;
+    Definir codigo, i Como Entero;
+    Definir precio Como Real;
+    Definir cantidad Como Entero;
+	Dimension nombre[100];
+	Dimension codigo[100];
+	Dimension precio[100];
+	Dimension cantidad[100];
+    Definir cantidadProductos Como Entero;
+    cantidadProductos <- 0;
+    Definir opcion Como Entero;
+        Escribir "MENU DE INVENTARIO";
+        Escribir "1. Agregar nuevo producto";
+        Escribir "2. Buscar producto por código";
+        Escribir "3. Actualizar cantidad de producto";
+        Escribir "4. Mostrar todos los productos";
+        Escribir "5. Eliminar un producto";
+        Escribir "6. Salir";
+        Escribir "Elige una opción: ";
+        Leer opcion;
+        Segun opcion Hacer
+            1:
+                Si cantidadProductos < MAX_PRODUCTOS Entonces
+                    Escribir "Ingrese el nombre del producto: ";
+                    Leer nombre[cantidadProductos];
+                    Escribir "Ingrese el código del producto: ";
+                    Leer codigo[cantidadProductos];
+                    Escribir "Ingrese el precio del producto: ";
+                    Leer precio[cantidadProductos];
+                    Escribir "Ingrese la cantidad del producto: ";
+                    Leer cantidad[cantidadProductos];
+                    cantidadProductos <- cantidadProductos + 1;
+                    Escribir "Producto agregado con éxito.";
+                Sino
+                    Escribir "No se pueden agregar más productos.";
+                FinSi
+            2:
+                Definir codigoBuscar Como Entero;
+                Escribir "Ingrese el código del producto a buscar: ";
+                Leer codigoBuscar;
+                Definir encontrado Como Logico;
+                encontrado <- Falso;
+                Para i <- 0 Hasta cantidadProductos - 1 Hacer
+                    Si codigo[i] = codigoBuscar Entonces
+                        Escribir "Producto encontrado: ", nombre[i];
+                        Escribir "Código: ", codigo[i];
+                        Escribir "Precio: ", precio[i];
+                        Escribir "Cantidad: ", cantidad[i];
+                        encontrado <- Verdadero;
+                        finsi
+                Fin Para
+                Si No encontrado Entonces
+                    Escribir "Producto no encontrado.";
+                FinSi
+            3:
+                Definir codigoActualizar Como Entero;
+                Escribir "Ingrese el código del producto a actualizar: ";
+                Leer codigoActualizar;
+                encontrado <- Falso;
+                Para i <- 0 Hasta cantidadProductos - 1 Hacer
+                    Si codigo[i] = codigoActualizar Entonces
+                        Escribir "Ingrese la nueva cantidad: ";
+                        Leer cantidad[i];
+                        Escribir "Cantidad actualizada con éxito.";
+                        encontrado <- Verdadero;
+                    FinSi
+                Fin Para
+                Si No encontrado Entonces
+                    Escribir "Producto no encontrado.";
+                FinSi
+            4:
+                Escribir "Lista de productos en el inventario:";
+                Para i <- 0 Hasta cantidadProductos - 1 Hacer
+                    Escribir "Producto: ", nombre[i], " | Código: ", codigo[i], " | Precio: ", precio[i], " | Cantidad: ", cantidad[i];
+                Fin Para
+				
+            5:
+                Definir codigoEliminar Como Entero;
+                Escribir "Ingrese el código del producto a eliminar: ";
+                Leer codigoEliminar;
+                encontrado <- Falso;
+                Para i <- 0 Hasta cantidadProductos - 1 Hacer
+                    Si codigo[i] = codigoEliminar Entonces
+                        cantidadProductos <-  cantidadProductos - 1;
+                        nombre[i] <- nombre[cantidadProductos];
+                        codigo[i] <- codigo[cantidadProductos];
+                        precio[i] <- precio[cantidadProductos];
+                        cantidad[i] <- cantidad[cantidadProductos];
+                        Escribir "Producto eliminado con éxito.";
+                        encontrado <- Verdadero;
+                    FinSi
+                Fin Para
+                Si No encontrado Entonces
+                    Escribir "Producto no encontrado.";
+                FinSi
+				
+            6:
+                Escribir "Saliendo del programa...";
+            De Otro Modo:
+                Escribir "Opción no válida.";
+        Fin Segun
+		si opcion = 6 Entonces
+			Escribir " Adios";
+		FinSi
+Fin Proceso
